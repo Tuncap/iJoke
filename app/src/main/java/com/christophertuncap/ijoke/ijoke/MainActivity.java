@@ -20,6 +20,8 @@ import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class MainActivity extends ListActivity {
@@ -73,6 +75,7 @@ public class MainActivity extends ListActivity {
             // ok if file does not exist
         }
 
+        Collections.sort(jokes,new SortByTitle());
         return jokes;
     }
 
@@ -224,5 +227,13 @@ public class MainActivity extends ListActivity {
             e.printStackTrace();
             Toast.makeText(this, "Error saving data", Toast.LENGTH_SHORT).show();
         }
+    }
+}
+
+class SortByTitle implements Comparator<Joke>
+{
+    public int compare(Joke a, Joke b)
+    {
+        return a.getTitle().compareTo(b.getTitle());
     }
 }
